@@ -1,0 +1,3 @@
+class ReviewsAndRatingsEntity {
+  const ReviewsAndRatingsEntity();
+}

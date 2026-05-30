@@ -1,0 +1,3 @@
+class OrdersEntity {
+  const OrdersEntity();
+}

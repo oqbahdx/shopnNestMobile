@@ -1,0 +1,9 @@
+- [x] Core error classes (`failures.dart` and `exceptions.dart`) exist and are well-defined.
+- [x] Core usecase interface (`usecase.dart`) exists and provides the standard contract.
+- [x] Core network interface (`network_info.dart`) exists.
+- [x] Feature `auth` contains a basic entity and repository interface.
+- [x] Feature `products` contains a basic entity and repository interface.
+- [x] Feature `reviews_and_ratings` contains a basic entity and repository interface.
+- [x] Feature `carts` contains a basic entity and repository interface.
+- [x] Feature `orders` contains a basic entity and repository interface.
+- [x] Feature `payments` contains a basic entity and repository interface.
