@@ -1,0 +1,7 @@
+- [x] Sign Up screen uses `#0B73D9` for app bar, focused states, field icons, and text links.
+- [x] Register CTA button background uses `#FF6D00` and no other component uses that color as a background fill.
+- [x] Background is `#FFFFFF` or `#F8F9FA` and spacing feels mobile-first and breathable.
+- [x] Typography uses `#1E293B` for main text and `#64748B` for secondary/placeholder text.
+- [x] Form fields are exactly: Full Name, Email Address, Password with eye toggle.
+- [x] “Already have an account? Log in” is present and “Log in” is clickable and styled in `#0B73D9`.
+- [x] Submitting maps Full Name → firstName/lastName and sets confirmPassword=password while keeping the existing API/BLoC flow working.
