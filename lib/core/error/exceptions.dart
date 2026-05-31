@@ -1,11 +1,30 @@
-class ServerException implements Exception {
+abstract class AppException implements Exception {
   final String message;
-  
-  const ServerException({this.message = 'Server Exception'});
+
+  const AppException(this.message);
 }
 
-class CacheException implements Exception {
-  final String message;
-  
-  const CacheException({this.message = 'Cache Exception'});
+class ServerException extends AppException {
+  const ServerException({String message = 'Server Exception'}) : super(message);
+}
+
+class ValidationException extends AppException {
+  final String? errorCode;
+
+  const ValidationException({
+    required String message,
+    this.errorCode,
+  }) : super(message);
+}
+
+class NetworkException extends AppException {
+  const NetworkException({String message = 'Network Error'}) : super(message);
+}
+
+class TimeoutException extends AppException {
+  const TimeoutException({String message = 'Request Timeout'}) : super(message);
+}
+
+class CacheException extends AppException {
+  const CacheException({String message = 'Cache Exception'}) : super(message);
 }
