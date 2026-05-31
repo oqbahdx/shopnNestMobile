@@ -2,11 +2,18 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../models/forgot_password_request_model.dart';
+import '../models/login_request_model.dart';
+import '../models/login_response_model.dart';
 import '../models/register_request_model.dart';
 import '../models/register_response_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<RegisterResponseModel> register(RegisterRequestModel requestModel);
+
+  Future<LoginResponseModel> login(LoginRequestModel requestModel);
+
+  Future<RegisterResponseModel> forgotPassword(ForgotPasswordRequestModel requestModel);
 }
 
 @LazySingleton(as: AuthRemoteDataSource)
@@ -65,6 +72,74 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         if (errorCode == 'AUTH_IDENTITY_ERROR') {
           throw ValidationException(message: message, errorCode: errorCode);
         }
+        throw ServerException(message: message);
+      }
+
+      throw NetworkException(message: e.message ?? 'Network Error');
+    } catch (e) {
+      throw ServerException(message: e.toString());
+    }
+  }
+
+  @override
+  Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
+    try {
+      final response = await dio.post(
+        '/api/v1/auth/login',
+        data: requestModel.toJson(),
+      );
+
+      return LoginResponseModel.fromJson(response.data);
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.sendTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        throw const TimeoutException(message: 'Request Timeout');
+      }
+
+      if (e.type == DioExceptionType.connectionError) {
+        throw NetworkException(message: e.message ?? 'Network Error');
+      }
+
+      final responseData = e.response?.data;
+      if (responseData != null) {
+        final message = _extractMessage(responseData);
+        final errorCode = _extractErrorCode(responseData);
+        if (errorCode == 'AUTH_INVALID_CREDENTIALS') {
+          throw ValidationException(message: message, errorCode: errorCode);
+        }
+        throw ServerException(message: message);
+      }
+
+      throw NetworkException(message: e.message ?? 'Network Error');
+    } catch (e) {
+      throw ServerException(message: e.toString());
+    }
+  }
+
+  @override
+  Future<RegisterResponseModel> forgotPassword(ForgotPasswordRequestModel requestModel) async {
+    try {
+      final response = await dio.post(
+        '/api/v1/auth/forgot-password',
+        data: requestModel.toJson(),
+      );
+
+      return RegisterResponseModel.fromJson(response.data);
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.sendTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        throw const TimeoutException(message: 'Request Timeout');
+      }
+
+      if (e.type == DioExceptionType.connectionError) {
+        throw NetworkException(message: e.message ?? 'Network Error');
+      }
+
+      final responseData = e.response?.data;
+      if (responseData != null) {
+        final message = _extractMessage(responseData);
         throw ServerException(message: message);
       }
 

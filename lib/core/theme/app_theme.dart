@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
 
-/// Centralised Material 3 theme for ShopNest.
-///
-/// Usage:
-/// ```dart
-/// MaterialApp(
-///   theme: AppTheme.light,
-///   ...
-/// )
-/// ```
 abstract final class AppTheme {
   // ── Border radius constants ────────────────────────────────────────────────
   static const double radiusXs = 6;
@@ -42,8 +34,8 @@ abstract final class AppTheme {
         boxShadow: const [
           BoxShadow(
             color: AppColors.shadowColor,
-            blurRadius: 8,
-            offset: Offset(0, 2),
+            blurRadius: 20,
+            offset: Offset(0, 4),
           ),
         ],
       );
@@ -57,9 +49,18 @@ abstract final class AppTheme {
         brightness: Brightness.light,
         primary: AppColors.primary,
         onPrimary: AppColors.textOnPrimary,
+        primaryContainer: AppColors.primaryContainer,
+        onPrimaryContainer: AppColors.onPrimaryContainer,
+        secondary: AppColors.secondary,
+        onSecondary: AppColors.onSecondary,
+        secondaryContainer: AppColors.secondaryContainer,
+        onSecondaryContainer: AppColors.onSecondaryContainer,
+        tertiary: AppColors.tertiary,
+        error: AppColors.error,
         surface: AppColors.surface,
         onSurface: AppColors.textPrimary,
-        error: AppColors.error,
+        errorContainer: AppColors.errorContainer,
+        onErrorContainer: AppColors.onErrorContainer,
       ),
     );
 
@@ -95,43 +96,43 @@ abstract final class AppTheme {
           horizontal: spaceLg,
           vertical: spaceMd + 2,
         ),
-        labelStyle: const TextStyle(
+        labelStyle: GoogleFonts.plusJakartaSans(
           color: AppColors.textSecondary,
           fontSize: 14,
           fontWeight: FontWeight.w400,
         ),
-        hintStyle: const TextStyle(
+        hintStyle: GoogleFonts.plusJakartaSans(
           color: AppColors.textHint,
           fontSize: 14,
         ),
         prefixIconColor: AppColors.textSecondary,
         suffixIconColor: AppColors.textSecondary,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radiusMd),
+          borderRadius: BorderRadius.circular(radiusLg),
           borderSide: const BorderSide(color: AppColors.border),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radiusMd),
+          borderRadius: BorderRadius.circular(radiusLg),
           borderSide: const BorderSide(color: AppColors.border),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radiusMd),
+          borderRadius: BorderRadius.circular(radiusLg),
           borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radiusMd),
+          borderRadius: BorderRadius.circular(radiusLg),
           borderSide: const BorderSide(color: AppColors.error),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radiusMd),
+          borderRadius: BorderRadius.circular(radiusLg),
           borderSide: const BorderSide(color: AppColors.error, width: 1.5),
         ),
-        errorStyle: const TextStyle(
+        errorStyle: GoogleFonts.plusJakartaSans(
           color: AppColors.error,
           fontSize: 12,
           fontWeight: FontWeight.w400,
         ),
-        floatingLabelStyle: TextStyle(
+        floatingLabelStyle: GoogleFonts.plusJakartaSans(
           color: AppColors.primary,
           fontSize: 13,
           fontWeight: FontWeight.w500,
@@ -141,17 +142,17 @@ abstract final class AppTheme {
       // ── ElevatedButton ───────────────────────────────────────────────────
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
+          backgroundColor: AppColors.secondaryContainer,
           foregroundColor: AppColors.textOnPrimary,
           disabledBackgroundColor: AppColors.border,
           disabledForegroundColor: AppColors.textHint,
-          minimumSize: const Size(double.infinity, 52),
+          minimumSize: const Size(double.infinity, 48),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radiusMd),
+            borderRadius: BorderRadius.circular(radiusLg),
           ),
           elevation: 0,
           shadowColor: Colors.transparent,
-          textStyle: const TextStyle(
+          textStyle: GoogleFonts.plusJakartaSans(
             fontSize: 15,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.1,
@@ -163,7 +164,7 @@ abstract final class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
-          textStyle: const TextStyle(
+          textStyle: GoogleFonts.plusJakartaSans(
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
@@ -171,71 +172,73 @@ abstract final class AppTheme {
       ),
 
       // ── Typography ────────────────────────────────────────────────────────
-      textTheme: const TextTheme(
-        displayLarge: TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: 36,
-          fontWeight: FontWeight.w700,
-          letterSpacing: -0.8,
-        ),
-        headlineLarge: TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: 28,
-          fontWeight: FontWeight.w700,
-          letterSpacing: -0.5,
-        ),
-        headlineMedium: TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: 24,
-          fontWeight: FontWeight.w700,
-          letterSpacing: -0.3,
-        ),
-        headlineSmall: TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: 20,
-          fontWeight: FontWeight.w700,
-          letterSpacing: -0.2,
-        ),
-        titleLarge: TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: 17,
-          fontWeight: FontWeight.w600,
-          letterSpacing: -0.1,
-        ),
-        titleMedium: TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-        ),
-        bodyLarge: TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          height: 1.5,
-        ),
-        bodyMedium: TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          height: 1.5,
-        ),
-        bodySmall: TextStyle(
-          color: AppColors.textSecondary,
-          fontSize: 13,
-          fontWeight: FontWeight.w400,
-          height: 1.4,
-        ),
-        labelLarge: TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 0.1,
-        ),
-        labelSmall: TextStyle(
-          color: AppColors.textSecondary,
-          fontSize: 11,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 0.4,
+      textTheme: GoogleFonts.plusJakartaSansTextTheme(
+        const TextTheme(
+          displayLarge: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 36,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.8,
+          ),
+          headlineLarge: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 28,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.5,
+          ),
+          headlineMedium: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.3,
+          ),
+          headlineSmall: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.2,
+          ),
+          titleLarge: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+            letterSpacing: -0.1,
+          ),
+          titleMedium: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
+          bodyLarge: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            height: 1.5,
+          ),
+          bodyMedium: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            height: 1.5,
+          ),
+          bodySmall: TextStyle(
+            color: AppColors.textSecondary,
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
+            height: 1.4,
+          ),
+          labelLarge: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.1,
+          ),
+          labelSmall: TextStyle(
+            color: AppColors.textSecondary,
+            fontSize: 11,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.4,
+          ),
         ),
       ),
 
