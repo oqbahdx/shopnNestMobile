@@ -92,6 +92,51 @@ abstract final class AppColors {
   /// Card shadow color
   static const Color shadowColor = Color(0x0D0F172A); // Slate-900 @ 5%
 
+  // ── Stitch export tokens ─────────────────────────────────────────────────
+  static const Color stitchSurface = Color(0xFFF7F9FB);
+  static const Color stitchSurfaceContainerLowest = Color(0xFFFFFFFF);
+  static const Color stitchSurfaceContainerLow = Color(0xFFF2F4F6);
+  static const Color stitchSurfaceContainer = Color(0xFFECEEF0);
+  static const Color stitchSurfaceContainerHigh = Color(0xFFE6E8EA);
+  static const Color stitchSurfaceContainerHighest = Color(0xFFE0E3E5);
+  static const Color stitchSurfaceTint = Color(0xFF006397);
+  static const Color stitchPrimary = Color(0xFF006397);
+  static const Color stitchPrimaryContainer = Color(0xFF3DB1FF);
+  static const Color stitchOnPrimaryContainer = Color(0xFF004166);
+  static const Color stitchPrimaryFixed = Color(0xFFCCE5FF);
+  static const Color stitchOnPrimaryFixed = Color(0xFF001D31);
+  static const Color stitchOnPrimaryFixedVariant = Color(0xFF004B73);
+  static const Color stitchSecondary = Color(0xFF904D00);
+  static const Color stitchSecondaryContainer = Color(0xFFFD8B00);
+  static const Color stitchOnSecondaryContainer = Color(0xFF603100);
+  static const Color stitchOnSecondary = Color(0xFFFFFFFF);
+  static const Color stitchSecondaryFixed = Color(0xFFFFDCC3);
+  static const Color stitchSecondaryFixedDim = Color(0xFFFFB77D);
+  static const Color stitchOnSecondaryFixed = Color(0xFF2F1500);
+  static const Color stitchOnSecondaryFixedVariant = Color(0xFF6E3900);
+  static const Color stitchTertiary = Color(0xFF565E74);
+  static const Color stitchTertiaryContainer = Color(0xFFA1A9C2);
+  static const Color stitchOnTertiaryContainer = Color(0xFF363E53);
+  static const Color stitchTertiaryFixed = Color(0xFFDAE2FD);
+  static const Color stitchTertiaryFixedDim = Color(0xFFBEC6E0);
+  static const Color stitchOnTertiaryFixed = Color(0xFF131B2E);
+  static const Color stitchOnTertiary = Color(0xFFFFFFFF);
+  static const Color stitchOnBackground = Color(0xFF191C1E);
+  static const Color stitchOnSurface = Color(0xFF191C1E);
+  static const Color stitchOnSurfaceVariant = Color(0xFF3F4851);
+  static const Color stitchInverseOnSurface = Color(0xFFEFF1F3);
+  static const Color stitchInverseSurface = Color(0xFF2D3133);
+  static const Color stitchInversePrimary = Color(0xFF93CCFF);
+  static const Color stitchOutline = Color(0xFF6F7882);
+  static const Color stitchOutlineVariant = Color(0xFFBEC7D3);
+  static const Color stitchError = Color(0xFFBA1A1A);
+  static const Color stitchErrorContainer = Color(0xFFFFDAD6);
+  static const Color stitchOnError = Color(0xFFFFFFFF);
+  static const Color stitchOnErrorContainer = Color(0xFF93000A);
+  static const Color onSurfaceVariant = Color(0xFF3F4851);
+  static const Color outline = Color(0xFF6F7882);
+
+
   // ── Legacy aliases (keeps existing imports compiling) ─────────────────────
   @Deprecated('Use textPrimary')
   static const Color text = textPrimary;
