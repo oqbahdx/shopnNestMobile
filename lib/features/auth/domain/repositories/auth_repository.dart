@@ -13,4 +13,8 @@ abstract class AuthRepository {
   Future<Either<Failure, LoginEntity>> login(LoginParams params);
 
   Future<Either<Failure, RegisterEntity>> forgotPassword(ForgotPasswordParams params);
+
+  Future<bool> hasToken();
+
+  Future<void> deleteToken();
 }

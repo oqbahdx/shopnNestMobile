@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../auth/presentation/bloc/auth/auth_bloc.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -47,6 +50,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     );
 
     _fadeController.forward();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AuthBloc>().add(const AuthEvent.authCheckRequested());
+    });
   }
 
   @override
@@ -58,7 +65,14 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          authenticated: () => context.go('/home'),
+          unauthenticated: () => context.go('/login'),
+        );
+      },
+      child: Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -153,6 +167,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             ],
           ),
         ),
+      ),
       ),
     );
   }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shop_nest/features/auth/presentation/bloc/forgot_password/forgot_password_bloc.dart';
-import 'package:shop_nest/features/auth/presentation/pages/forgot_password_page.dart';
+import 'core/routing/app_router.dart';
+import 'core/services/storage/secure_storage_service.dart';
 import 'core/theme/app_theme.dart';
-import 'features/auth/presentation/bloc/login/login_bloc.dart';
-import 'features/auth/presentation/pages/login_page.dart';
+import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'injection.dart';
 
 void main() {
@@ -23,15 +22,23 @@ class MainApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.light,
-          home: BlocProvider(
-            create: (context) => getIt<ForgotPasswordBloc>(),
-            child: const ForgotPasswordPage(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => AuthBloc(
+                secureStorageService: getIt<SecureStorageService>(),
+              ),
+            ),
+          ],
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.light,
+            routerConfig: goRouter,
           ),
         );
       },
     );
   }
 }
+
+

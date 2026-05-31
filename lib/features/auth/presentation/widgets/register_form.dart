@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
@@ -181,6 +182,7 @@ class _RegisterFormState extends State<RegisterForm> {
           success: (result, _, __, ___, ____, _____, ______, _______) async {
             await getIt<ToastService>().showSuccess(result.data);
             _resetForm(state);
+            if (context.mounted) context.go('/login');
           },
           failure: (message, _, __, ___, ____, _____, ______, _______) async {
             await getIt<ToastService>().showError(message);
@@ -425,7 +427,7 @@ class _LoginLink extends StatelessWidget {
               ),
         ),
         TextButton(
-          onPressed: () => getIt<ToastService>().showInfo('Log in tapped'),
+          onPressed: () => context.go('/login'),
           style: TextButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
             minimumSize: Size.zero,

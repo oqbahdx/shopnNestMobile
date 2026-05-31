@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/services/toast/toast_service.dart';
 import '../../../../injection.dart';
 import '../bloc/login/login_bloc.dart';
-import '../pages/forgot_password_page.dart';
 import 'auth_text_field.dart';
 
 class LoginForm extends StatefulWidget {
@@ -100,6 +100,7 @@ class _LoginFormState extends State<LoginForm> {
           success: (result, _) async {
             await getIt<ToastService>().showSuccess(result.message);
             _resetForm(state);
+            if (context.mounted) context.go('/home');
           },
           failure: (message, _) async {
             await getIt<ToastService>().showError(message);
@@ -244,9 +245,7 @@ class _ForgotPasswordLink extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () => Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => const ForgotPasswordPage()),
-        ),
+        onPressed: () => context.go('/forgot-password'),
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
           minimumSize: Size.zero,
@@ -305,7 +304,7 @@ class _SignUpLink extends StatelessWidget {
               ),
         ),
         TextButton(
-          onPressed: () => getIt<ToastService>().showInfo('Sign up tapped'),
+          onPressed: () => context.go('/register'),
           style: TextButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
             minimumSize: Size.zero,

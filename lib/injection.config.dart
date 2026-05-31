@@ -14,6 +14,7 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import 'core/network/dio_module.dart' as _i731;
+import 'core/services/storage/secure_storage_service.dart' as _i1039;
 import 'core/services/toast/fluttertoast_service.dart' as _i186;
 import 'core/services/toast/toast_service.dart' as _i180;
 import 'features/auth/data/datasources/auth_remote_data_source.dart' as _i767;
@@ -36,6 +37,9 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio);
+    gh.lazySingleton<_i1039.SecureStorageService>(
+      () => _i1039.SecureStorageService(),
+    );
     gh.lazySingleton<_i767.AuthRemoteDataSource>(
       () => _i767.AuthRemoteDataSourceImpl(dio: gh<_i361.Dio>()),
     );
@@ -43,6 +47,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1015.AuthRepository>(
       () => _i111.AuthRepositoryImpl(
         remoteDataSource: gh<_i767.AuthRemoteDataSource>(),
+        secureStorageService: gh<_i1039.SecureStorageService>(),
       ),
     );
     gh.lazySingleton<_i993.ForgotPasswordUseCase>(

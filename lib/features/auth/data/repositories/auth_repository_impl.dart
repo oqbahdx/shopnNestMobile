@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
+import '../../../../core/services/storage/secure_storage_service.dart';
 import '../../domain/entities/login_entity.dart';
 import '../../domain/entities/register_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -17,8 +18,12 @@ import '../models/register_request_model.dart';
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
+  final SecureStorageService secureStorageService;
 
-  AuthRepositoryImpl({required this.remoteDataSource});
+  AuthRepositoryImpl({
+    required this.remoteDataSource,
+    required this.secureStorageService,
+  });
 
   @override
   Future<Either<Failure, RegisterEntity>> register(RegisterParams params) async {
@@ -75,6 +80,8 @@ class AuthRepositoryImpl implements AuthRepository {
         return const Left(ServerFailure('Invalid server response'));
       }
 
+      await secureStorageService.saveToken(data.accessToken);
+
       return Right(LoginEntity(
         message: responseModel.message,
         accessToken: data.accessToken,
@@ -121,6 +128,16 @@ class AuthRepositoryImpl implements AuthRepository {
     } catch (e) {
       return Left(UnexpectedFailure(e.toString()));
     }
+  }
+
+  @override
+  Future<bool> hasToken() async {
+    return secureStorageService.hasToken();
+  }
+
+  @override
+  Future<void> deleteToken() async {
+    await secureStorageService.deleteToken();
   }
 }
 
